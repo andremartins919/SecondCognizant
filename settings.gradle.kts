@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "SecondCognizant"
 include(":app")
- 
+include(":javaexs")

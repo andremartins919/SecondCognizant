@@ -16,7 +16,7 @@
             android:name=".AnyActivity"
             android:exported="true" >
             <intent-filter>
-                <action android:name="cognizant.portugal.android"/>
+                <action android:name="ineed.water"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
