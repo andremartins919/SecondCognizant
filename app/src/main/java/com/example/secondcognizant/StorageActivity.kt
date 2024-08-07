@@ -1,11 +1,19 @@
 package com.example.secondcognizant
 
+//data/data/com.example.secondcognizant/sharedprefs/filenamecognizant.xml
+
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.secondcognizant.databinding.ActivityStorageBinding
+
+private  val fileName = "filenamecognizant"
+
+private const val NAME = "name"
+
+private const val PWD = "pwd"
 
 class StorageActivity : AppCompatActivity() {
 
@@ -25,7 +33,15 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun storeData() {
-        TODO("Not yet implemented")
+        //create a file
+        val preferennces = getSharedPreferences(fileName, MODE_PRIVATE)
+        //open the file
+        val editor = preferennces.edit()
+        //write to the file
+        editor.putString(NAME,binding.etName.text.toString())
+        editor.putString(PWD,binding.etPassword.text.toString())
+        //save the file
+        editor.apply()
     }
 
     override fun onResume() {
@@ -34,7 +50,13 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun restoreData() {
-        TODO("Not yet implemented")
+        //if file exists it'll open that file or create it
+        val preferennces = getSharedPreferences(fileName, MODE_PRIVATE)
+        val name = preferennces.getString(NAME,"")
+        val password = preferennces.getString(PWD,"")
+        binding.etName.setText(name)
+        binding.etPassword.setText(password)
+
     }
 
 }
