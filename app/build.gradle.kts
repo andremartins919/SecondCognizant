@@ -4,6 +4,11 @@ plugins {
 }
 
 android {
+    buildFeatures {
+        viewBinding = true
+        aidl = true
+    }
+
     namespace = "com.example.secondcognizant"
     compileSdk = 34
 
