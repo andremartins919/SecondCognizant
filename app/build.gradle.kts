@@ -9,6 +9,7 @@ android {
         aidl = true
     }
 
+
     namespace = "com.example.secondcognizant"
     compileSdk = 34
 
