@@ -3,6 +3,7 @@ package com.example.secondcognizant
 //data/data/com.example.secondcognizant/sharedprefs/filenamecognizant.xml
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,6 +26,19 @@ class StorageActivity : AppCompatActivity() {
        var view = binding.root
         setContentView(view)
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.button.setOnClickListener {
+
+           // try {
+                var a = 30/0
+            /*} catch (e: Exception) {
+                Log.i("MAin","alternate medicine")
+            }*/
+
+        }
     }
 
     override fun onPause() {
