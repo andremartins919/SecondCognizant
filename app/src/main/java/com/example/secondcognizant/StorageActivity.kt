@@ -7,7 +7,12 @@ import android.os.Bundle
 import android.provider.CallLog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cursoradapter.widget.SimpleCursorAdapter
+import com.example.secondcognizant.database.Item
+import com.example.secondcognizant.database.ItemDao
+import com.example.secondcognizant.database.ItemRoomDatabase
 import com.example.secondcognizant.databinding.ActivityStorageBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 private  val fileName = "filenamecognizant"
@@ -18,10 +23,14 @@ private const val PWD = "pwd"
 
 class StorageActivity : AppCompatActivity() {
 
+    lateinit var dao: ItemDao
+
+
     lateinit var  binding: ActivityStorageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        var database = ItemRoomDatabase.getDatabase(this)
+        dao = database.itemDao()
         binding = ActivityStorageBinding.inflate(layoutInflater)
        var view = binding.root
         setContentView(view)
@@ -32,11 +41,10 @@ class StorageActivity : AppCompatActivity() {
         super.onStart()
         binding.button.setOnClickListener {
 
-           // try {
-                var a = 30/0
-            /*} catch (e: Exception) {
-                Log.i("MAin","alternate medicine")
-            }*/
+            GlobalScope.launch {
+                var item = Item(21, "fruits", 11.11, 11)
+                dao.insert(item)
+            }
 
         }
     }
