@@ -11,7 +11,9 @@ import com.example.secondcognizant.database.Item
 import com.example.secondcognizant.database.ItemDao
 import com.example.secondcognizant.database.ItemRoomDatabase
 import com.example.secondcognizant.databinding.ActivityStorageBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 
@@ -46,6 +48,13 @@ class StorageActivity : AppCompatActivity() {
                 dao.insert(item)
             }
 
+        }
+
+        binding.btnGet.setOnClickListener {
+            GlobalScope.launch(Dispatchers.Main) {
+                var item = dao.getItem(21).first()
+                binding.tvDb.setText(item.toString())
+            }
         }
     }
 
