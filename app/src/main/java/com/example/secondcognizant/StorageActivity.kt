@@ -3,8 +3,8 @@ package com.example.secondcognizant
 //data/data/com.example.secondcognizant/sharedprefs/filenamecognizant.xml
 
 import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
+import android.provider.CallLog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cursoradapter.widget.SimpleCursorAdapter
 import com.example.secondcognizant.databinding.ActivityStorageBinding
@@ -63,14 +63,20 @@ class StorageActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         restoreData()
+        val cursor: Cursor? = getContentResolver().query(
+            CallLog.Calls.CONTENT_URI,
+            null, null, null, CallLog.Calls.DATE + " DESC"
+        )
+       // val uriSms = Uri.parse("content://sms/inbox")
+        //val dataCursor: Cursor? = getContentResolver().query(uriSms, null, null, null, null)
+        val colName = CallLog.Calls.NUMBER
 
-        val uriSms = Uri.parse("content://sms/inbox")
-        val dataCursor: Cursor? = getContentResolver().query(uriSms, null, null, null, null)
-        val fromColNames = arrayOf("address","body")
-        val toTexviewIds = intArrayOf(android.R.id.text1,android.R.id.text2)
+        val fromColNames = arrayOf(colName)
+        val toTexviewIds = intArrayOf(android.R.id.text1)
+
         var cursorAdaper = SimpleCursorAdapter(this,
-            android.R.layout.simple_list_item_2,
-            dataCursor,fromColNames,toTexviewIds)
+            android.R.layout.simple_list_item_1,
+            cursor,fromColNames,toTexviewIds)
         binding.listView.adapter = cursorAdaper
     }
 
